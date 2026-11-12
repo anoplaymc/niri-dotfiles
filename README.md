@@ -1,4 +1,29 @@
 # Niri Dotfiles
+# Warning: all files in that folders:
+~/.config/niri
+
+~/.config/waybar
+
+~/.config/wofi
+
+~/.config/fastfetch
+
+~/.config/kitty
+# Will be deleted!
+
+## Install this requirements before installing:
+niri
+
+waybar
+
+wofi
+
+awww
+
+fastfetch (optional)
+
+kitty
+
 ## How to download and install:
 git clone https://github.com/anoplaymc/niri-dotfiles.git
 
