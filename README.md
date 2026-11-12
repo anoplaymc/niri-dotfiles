@@ -32,3 +32,8 @@ cd niri-dotfiles
 chmod +x install.sh
 
 ./install.sh
+
+## If installing finishes sucsessfuly(optional):
+cd
+
+rm -rf ~/niri-dotfiles
