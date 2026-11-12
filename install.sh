@@ -14,16 +14,23 @@ FOLDERS=(
     fastfetch
 )
 
-echo "Проверка исходных папок..."
+echo "Проверка исходных файлов..."
 
 for folder in "${FOLDERS[@]}"; do
     if [[ ! -d "$SOURCE/$folder" ]]; then
-        echo "Ошибка: $SOURCE/$folder не найдена!"
+        echo "Ошибка: папка $SOURCE/$folder не найдена!"
         exit 1
     fi
 done
 
+if [[ ! -f "$SOURCE/wallpaper.jpeg" ]]; then
+    echo "Ошибка: wallpaper.jpeg не найден!"
+    exit 1
+fi
+
 echo "Удаление старых конфигов..."
+
+mkdir -p "$CONFIG"
 
 for folder in "${FOLDERS[@]}"; do
     rm -rf -- "$CONFIG/$folder"
@@ -35,4 +42,8 @@ for folder in "${FOLDERS[@]}"; do
     cp -a -- "$SOURCE/$folder" "$CONFIG/"
 done
 
-echo "Готово! Конфиги успешно установлены."
+echo "Установка обоев..."
+
+cp -f -- "$SOURCE/wallpaper.jpeg" "$HOME/wallpaper.jpeg"
+
+echo "Готово! Конфиги и обои успешно установлены."
