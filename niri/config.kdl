@@ -1,0 +1,272 @@
+// ==========================================
+// STARTUP APPLICATIONS (Твой автозапуск + с гитхаба)
+// ==========================================
+spawn-sh-at-startup "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &"
+spawn-at-startup "awww-daemon"
+spawn-at-startup "sh" "-c" "awww img /home/anoplay/wallpaper.jpeg"
+spawn-at-startup "sh" "-c" "vicinae server &"
+
+// ==========================================
+// GENERAL SETTINGS & MONITORS
+// ==========================================
+prefer-no-csd
+screenshot-path "~/Pictures/Screenshots/%Y-%m-%d %H-%M-%S.png"
+
+output "DP-1" {
+    mode "1920x1080@60.000"
+    position x=0 y=0
+    scale 1
+}
+
+output "HDMI-A-1" {
+    mode "1920x1080@100.000"
+    position x=1920 y=0
+    scale 1
+}
+
+output "DP-2" {
+    mode "1920x1080@100.000"
+    position x=3840 y=0
+    scale 1
+}
+
+input {
+    keyboard {
+        xkb {
+            layout "us,ru"
+            options "grp:win_space_toggle,grp:alt_shift_toggle"
+        }
+    }
+
+    touchpad {
+        tap
+    }
+
+    mouse {
+        accel-profile "flat"
+    }
+
+    focus-follows-mouse
+    workspace-auto-back-and-forth
+}
+
+hotkey-overlay {
+    skip-at-startup
+}
+
+cursor {
+    hide-when-typing
+    hide-after-inactive-ms 5000
+}
+
+overview {
+    backdrop-color "#1E1E2E"
+    workspace-shadow {
+        off
+    }
+}
+
+layer-rule {
+    match namespace="^awww-daemon$"
+    place-within-backdrop true
+}
+
+// ==========================================
+// BINDS (Твои привычные бинды из Hyprland + новые)
+// ==========================================
+binds {
+    // Shortcuts Panel
+    MOD+SHIFT+ESCAPE                    { show-hotkey-overlay; }
+
+    // Application Shortcuts (Твои из Hyprland: Kitty, Wofi, Dolphin, Hyprlock)
+    MOD+T                               hotkey-overlay-title="Open Terminal: kitty" { spawn-sh "kitty"; }
+    MOD+ALT+RETURN                      hotkey-overlay-title="Open Terminal: alacritty" { spawn-sh "alacritty"; }
+    MOD+ALT+B                           hotkey-overlay-title="Open Secondary Browser: chrome" { spawn-sh "google-chrome-stable"; }
+    MOD+SHIFT+Q                         hotkey-overlay-title="Lock Screen: hyprlock" { spawn-sh "hyprlock"; }
+    MOD+R                               hotkey-overlay-title="Open App Launcher: wofi" { spawn-sh "wofi --show drun"; }
+    MOD+A                               hotkey-overlay-title="Open App Launcher: vicinae" { spawn-sh "vicinae toggle"; }
+    MOD+B                               hotkey-overlay-title="Open Browser: firefox" { spawn-sh "firefox-developer-edition"; }
+    MOD+E                               hotkey-overlay-title="File Manager: Dolphin" { spawn-sh "dolphin"; }
+    MOD+ALT+E                           hotkey-overlay-title="File Manager: Yazi" { spawn-sh "yazi"; }
+    MOD+W { spawn "sh" "-c" "pkill waybar || waybar"; }
+    MOD+SHIFT+M { quit; }
+    // Media Keys (Твои мультимедиа клавиши с блокировкой)
+    XF86AudioRaiseVolume                allow-when-locked=true { spawn-sh "wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"; }
+    XF86AudioLowerVolume                allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"; }
+    XF86MonBrightnessUp                 allow-when-locked=true { spawn-sh "brightnessctl -e4 -n2 set 5%+"; }
+    XF86MonBrightnessDown               allow-when-locked=true { spawn-sh "brightnessctl -e4 -n2 set 5%-"; }
+    XF86AudioMute                       allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"; }
+    XF86AudioMicMute                    allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
+    XF86AudioNext                       allow-when-locked=true { spawn-sh "playerctl next"; }
+    XF86AudioPause                      allow-when-locked=true { spawn-sh "playerctl play-pause"; }
+    XF86AudioPlay                       allow-when-locked=true { spawn-sh "playerctl play-pause"; }
+    XF86AudioPrev                       allow-when-locked=true { spawn-sh "playerctl previous"; }
+
+    // Window Management
+    MOD+Q                               { close-window; }
+
+    MOD+LEFT                            { focus-column-left; }
+    MOD+DOWN                            { focus-window-down; }
+    MOD+UP                              { focus-window-up; }
+    MOD+RIGHT                           { focus-column-right; }
+
+    // Move windows within workspace
+    MOD+SHIFT+LEFT                      { move-column-left; }
+    MOD+SHIFT+DOWN                      { move-window-down; }
+    MOD+SHIFT+UP                        { move-window-up; }
+    MOD+SHIFT+RIGHT                     { move-column-right; }
+
+    // Workspace Management
+    MOD+ESCAPE                          hotkey-overlay-title="Open Overview" repeat=false { toggle-overview; }
+    MOD+WHEELSCROLLDOWN                 cooldown-ms=100 { focus-workspace-down; }
+    MOD+WHEELSCROLLUP                   cooldown-ms=100 { focus-workspace-up; }
+
+    // Numbered Workspaces (1-10)
+    MOD+1                               { focus-workspace 1; }
+    MOD+2                               { focus-workspace 2; }
+    MOD+3                               { focus-workspace 3; }
+    MOD+4                               { focus-workspace 4; }
+    MOD+5                               { focus-workspace 5; }
+    MOD+6                               { focus-workspace 6; }
+    MOD+7                               { focus-workspace 7; }
+    MOD+8                               { focus-workspace 8; }
+    MOD+9                               { focus-workspace 9; }
+    MOD+0                               { focus-workspace 10; }
+
+    // Move windows to numbered workspaces with MOD+SHIFT
+    MOD+SHIFT+1                         { move-column-to-workspace 1; }
+    MOD+SHIFT+2                         { move-column-to-workspace 2; }
+    MOD+SHIFT+3                         { move-column-to-workspace 3; }
+    MOD+SHIFT+4                         { move-column-to-workspace 4; }
+    MOD+SHIFT+5                         { move-column-to-workspace 5; }
+    MOD+SHIFT+6                         { move-column-to-workspace 6; }
+    MOD+SHIFT+7                         { move-column-to-workspace 7; }
+    MOD+SHIFT+8                         { move-column-to-workspace 8; }
+    MOD+SHIFT+9                         { move-column-to-workspace 9; }
+    MOD+SHIFT+0                         { move-column-to-workspace 10; }
+
+    MOD+TAB                             { focus-workspace-previous; }
+
+    // Layout Controls
+    MOD+C                               { center-column; }
+    MOD+CTRL+C                          { center-visible-columns; }
+    MOD+BRACKETLEFT                     { set-column-width "-10%"; }
+    MOD+BRACKETRIGHT                    { set-column-width "+10%"; }
+
+    // Window Modes
+    MOD+V                               { toggle-window-floating; }
+    MOD+F                               { fullscreen-window; }
+    MOD+M                               { maximize-column; }
+    MOD+L                               { spawn-sh "hyprlock"; }
+
+    // Utils
+    MOD+S                               { screenshot; }
+    MOD+SHIFT+S                         { screenshot-screen write-to-disk=true; }
+    MOD+CTRL+S                          { screenshot-window write-to-disk=true; }
+    MOD+P                               { spawn-sh "pgrep -x hyprpicker >/dev/null || hyprpicker"; }
+
+    // Waybar restart
+    MOD+ALT+W                           { spawn "sh" "-c" "pgrep -x waybar >/dev/null && killall waybar || waybar &"; }
+}
+
+// ==========================================
+// LAYOUT SETTINGS (С твоими отступами и рамками)
+// ==========================================
+layout {
+    gaps 10
+    center-focused-column "on-overflow"
+    background-color "transparent"
+
+    preset-column-widths {
+        proportion 0.33333
+        proportion 0.5
+        proportion 0.66667
+    }
+
+    focus-ring {
+        width 2
+        active-color "#ffffffff"
+        inactive-color "#595959aa"
+    }
+
+    insert-hint {
+        off
+        color "#1E1E2E"
+    }
+
+    struts {}
+}
+
+// Animation Settings
+animations {
+    workspace-switch {
+        spring damping-ratio=1.0 stiffness=1000 epsilon=0.0001
+    }
+    window-open {
+        duration-ms 200
+        curve "ease-out-quad"
+    }
+    window-close {
+        duration-ms 200
+        curve "ease-out-cubic"
+    }
+    horizontal-view-movement {
+        spring damping-ratio=1.0 stiffness=900 epsilon=0.0001
+    }
+    window-movement {
+        spring damping-ratio=1.0 stiffness=800 epsilon=0.0001
+    }
+    window-resize {
+        spring damping-ratio=1.0 stiffness=1000 epsilon=0.0001
+    }
+    config-notification-open-close {
+        spring damping-ratio=0.6 stiffness=1200 epsilon=0.001
+    }
+    screenshot-ui-open {
+        duration-ms 300
+        curve "ease-out-quad"
+    }
+    overview-open-close {
+        spring damping-ratio=1.0 stiffness=900 epsilon=0.0001
+    }
+}
+
+// Window Rules
+window-rule {
+    match app-id=r#"firefox$"# title="^Picture-in-Picture$"
+    open-floating true
+}
+
+// Глобальный внешний вид окон (скругления 10px под твой стиль)
+window-rule {
+    geometry-corner-radius 10
+    clip-to-geometry true
+}
+
+window-rule {
+    match is-active=false
+    opacity 0.9
+}
+
+// Environment Variables
+environment {
+    ELECTRON_OZONE_PLATFORM_HINT "auto"
+    XDG_SESSION_TYPE "wayland"
+    XDG_CURRENT_DESKTOP "niri"
+
+    QT_QPA_PLATFORM "wayland"
+    QT_QPA_PLATFORMTHEME "gtk3"
+    QT_QPA_PLATFORMTHEME_QT6 "gtk3"
+    QT_WAYLAND_DISABLE_WINDOWDECORATION "1"
+    QT_AUTO_SCREEN_SCALE_FACTOR "1"
+
+    GDK_BACKEND "wayland,x11"
+    MOZ_ENABLE_WAYLAND "1"
+    MOZ_DBUS_REMOTE "1"
+    _JAVA_AWT_WM_NONREPARENTING "1"
+    SDL_VIDEODRIVER "wayland,x11"
+    CLUTTER_BACKEND "wayland"
+
+    VDPAU_DRIVER "va_gl"
+    LIBVA_DRIVER_NAME "iHD"
+}

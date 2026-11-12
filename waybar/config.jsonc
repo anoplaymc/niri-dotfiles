@@ -1,0 +1,121 @@
+{
+    "layer": "top",
+    "position": "top",
+    "height": 30,
+    "spacing": 0,
+    "margin-top": 0,
+    "margin-bottom": 0,
+    "margin-left": 0,
+    "margin-right": 0,
+    
+    "modules-left": [
+        "clock"
+    ],
+    "modules-center": [
+        "mpris"
+    ],
+    "modules-right": [
+        "cpu",
+        "temperature",
+        "memory",
+        "disk",
+        "pulseaudio",
+        "network",
+        "battery",
+        "hyprland/language",
+        "tray"
+    ],
+
+    "hyprland/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": false,
+        "format": "{id}",
+        "on-click": "activate",
+        "sort-by-number": true,
+        "persistent-workspaces": {
+            "DP-2": [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ],
+            "HDMI-A-1": [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
+        }
+    },
+
+    "hyprland/window": {
+        "format": "{}",
+        "max-length": 35,
+        "separate-outputs": true
+    },
+
+    "mpris": {
+        "format": "󰎈 {artist} - {title}",
+        "format-paused": "󰏤 {artist} - {title}",
+        "max-length": 25,
+        "on-click": "playerctl play-pause"
+    },
+
+    "clock": {
+        "timezone": "Asia/Almaty",
+        "format": "󰥔 {:%H:%M}",
+        "format-alt": "󰃭 {:%d.%m.%Y}",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+    },
+
+    "cpu": {
+        "format": "󰻠 {usage}%",
+        "interval": 2
+    },
+
+    "temperature": {
+        "thermal-zone": 2,
+        "format": "󰔏 {temperatureC}°C",
+        "critical-threshold": 80
+    },
+
+    "memory": {
+        "format": "󰍛 {percentage}%",
+        "interval": 5
+    },
+
+    "disk": {
+        "format": "󰋊 {percentage_used}%",
+        "path": "/",
+        "interval": 30
+    },
+
+    "network": {
+        "format-wifi": "󰖩 {signalStrength}%",
+        "format-ethernet": "󰈀 Wired",
+        "format-disconnected": "󰖪 Off",
+        "on-click": "exec nmtui"
+    },
+
+    "pulseaudio": {
+        "format": "{icon} {volume}%",
+        "format-muted": "󰝟 Muted",
+        "format-icons": {
+            "default": ["󰕿", "󰖀", "󰕾"]
+        },
+        "on-click": "pavucontrol"
+    },
+
+    "battery": {
+        "states": {
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{icon} {capacity}%",
+        "format-charging": "󰂄 {capacity}%",
+        "format-plugged": "󰂄 {capacity}%",
+        "format-alt": "{icon} {time}",
+        "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
+    },
+
+    "hyprland/language": {
+        "format": "󰌌 {}",
+        "format-en": "EN",
+        "format-ru": "RU"
+    },
+
+    "tray": {
+        "icon-size": 14,
+        "spacing": 8
+    }
+}
