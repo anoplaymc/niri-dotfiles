@@ -9,6 +9,8 @@
 ~/.config/fastfetch
 
 ~/.config/kitty
+
+~/.local/state/noctalia/
 # Will be deleted!
 
 ## Install this requirements before installing:
@@ -23,6 +25,8 @@ awww
 fastfetch (optional)
 
 kitty
+
+noctalia
 
 ## How to download and install:
 git clone https://github.com/anoplaymc/niri-dotfiles.git
