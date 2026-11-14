@@ -34,7 +34,8 @@ Enter this command in your ~ home folder for better work
 git clone https://github.com/anoplaymc/niri-dotfiles.git && cd niri-dotfiles && chmod +x install.sh && ./install.sh && cd ~
 ```
 
-## If installing finishes sucsessfuly(optional):
+## If installing finishes sucsessfuly:
+This is an optional command to delete files and scripts needed to install dotfiles
 ```bash
 cd ~ && rm -rf ~/niri-dotfiles
 ```
