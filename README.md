@@ -29,15 +29,11 @@ kitty
 noctalia (optional if you will have a waybar)
 
 ## How to download and install:
-git clone https://github.com/anoplaymc/niri-dotfiles.git
-
-cd niri-dotfiles
-
-chmod +x install.sh
-
-./install.sh
+```bash
+git clone https://github.com/anoplaymc/niri-dotfiles.git && cd niri-dotfiles && chmod +x install.sh && ./install.sh
+```
 
 ## If installing finishes sucsessfuly(optional):
-cd
-
-rm -rf ~/niri-dotfiles
+```bash
+cd ~ && rm -rf ~/niri-dotfiles
+```
