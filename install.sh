@@ -1,4 +1,3 @@
-```bash
 #!/usr/bin/env bash
 
 set -e
@@ -81,4 +80,3 @@ echo "  noctalia   -> ~/.local/state/noctalia"
 echo "  wallpaper  -> ~/wallpaper.jpeg"
 echo ""
 echo "Готово!"
-```
